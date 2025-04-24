@@ -38,7 +38,7 @@ router.get('/:shortCode', async (req,res) =>{
             return res.status(404).json('No URL found !!')
         }
         
-    } catch (error) {
+    } catch (error) { 
         res.status(500).json('Server error')
     }
 })
