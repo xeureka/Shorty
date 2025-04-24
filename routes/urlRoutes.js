@@ -30,7 +30,7 @@ router.get('/:shortCode', async (req,res) =>{
 
     try {
 
-        const url = await Urls.find()
+        const url = await Urls.findOne({shortCode: req.params.shortCode})
 
         if (url){
             return res.redirect(url.longUrl)
