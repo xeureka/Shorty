@@ -30,11 +30,7 @@ router.get('/:shortCode', async (req,res) =>{
 
     try {
 
-<<<<<<< HEAD
-        const url = await Urls.find()
-=======
         const url = await Urls.findOne({shortCode: req.params.shortCode})
->>>>>>> 0d815f4f4e5d41ab6dc43273a4ab929eb0151dbb
 
         if (url){
             return res.redirect(url.longUrl)
@@ -42,7 +38,7 @@ router.get('/:shortCode', async (req,res) =>{
             return res.status(404).json('No URL found !!')
         }
         
-    } catch (error) {
+    } catch (error) { 
         res.status(500).json('Server error')
     }
 })
