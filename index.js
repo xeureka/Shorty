@@ -8,6 +8,10 @@ const urlRoutes = require('./routes/urlRoutes')
 app.use(cors())
 app.use(express.json())
 
+
+app.use('/',urlRoutes)
+
+
 app.use('/',urlRoutes)
 
 connectDB()
