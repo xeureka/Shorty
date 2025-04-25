@@ -2,13 +2,13 @@
 const express = require('express')
 const router = express.Router()
 const Urls = require('../models/url')
-const shortid = require('shortid')
+const generateRandomUrl = require('../utils/utils')
 
 
 router.post('/', async (req,res) =>{
 
     const {longUrl} = req.body;
-    const shortCode = shortid.generate()
+    const shortCode = generateRandomUrl()
 
     try {
 

@@ -7,6 +7,7 @@ const urlSchema = new mongoose.Schema({
     createdAt: {type: Date, default: Date.now}
 })
 
+
 const Urls = mongoose.model('Url',urlSchema)
 
 
