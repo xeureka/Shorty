@@ -5,7 +5,7 @@ const Urls = require('../models/url')
 const shortid = require('shortid')
 
 
-router.post('/short', async (req,res) =>{
+router.post('/', async (req,res) =>{
 
     const {longUrl} = req.body;
     const shortCode = shortid.generate()
