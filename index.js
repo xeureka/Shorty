@@ -12,8 +12,6 @@ app.use(express.json())
 app.use('/',urlRoutes)
 
 
-app.use('/',urlRoutes)
-
 connectDB()
 
 app.listen(3000, () => {
