@@ -21,7 +21,7 @@ router.post('/', async (req,res) =>{
         await url.save()
         
                 
-        res.send({shortUrl: `http://localhost:3000/${shortCode}`})
+        res.json({shortUrl: `http://localhost:3000/${shortCode}`})
         
     } catch (error) {
         res.status(500).json('Server error')
@@ -29,21 +29,21 @@ router.post('/', async (req,res) =>{
 })
 
 
-// router.get('/:shortCode', async (req,res) =>{
+router.get('/:shortCode', async (req,res) =>{
 
-//     try {
+    try {
 
-//         const url = await Urls.findOne({shortCode: req.params.shortCode})
+        const url = await Urls.findOne({shortCode: req.params.shortCode})
 
-//         if (url){
-//             return res.redirect(url.longUrl)
-//         } else{
-//             return res.status(404).json('No URL found !!')
-//         }
+        if (url){
+            return res.redirect(url.longUrl)
+        } else{
+            return res.status(404).json('No URL found !!')
+        }
         
-//     } catch (error) { 
-//         res.status(500).json('Server error')
-//     }
-// })
+    } catch (error) { 
+        res.status(500).json('Server error')
+    }
+})
 
 module.exports = router;
