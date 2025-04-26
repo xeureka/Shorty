@@ -26,6 +26,22 @@ router.post('/', async (req,res) =>{
     }
 })
 
+// a route to see all the current history of the user
+
+router.get('/', async (req,res) => {
+
+    try {
+
+        const allUsers = await Urls.find()
+
+        res.send(allUsers)
+        
+    } catch (error) {
+        res.status(404).send('Eror fetching data, ', error.message)
+        console.log('Error, Fetching history, ',error)
+    }
+})
+
 router.get('/:shortCode', async (req,res) =>{
 
     try {
