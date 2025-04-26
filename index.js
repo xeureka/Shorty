@@ -12,13 +12,13 @@ app.use(cors())
 app.use(express.json())
 
 
-app.use('/',urlRoutes)
+app.use('/',urlRoutes) 
 app.use('/register',Register)
-app.use('/login',login)
+app.use('/login',login) 
 
 connectDB()
 
 app.listen(3000, () => {
-    console.log('Server Connected Sucessfully !!')
+    console.log('Server is running at port 3000 !!')
 })
 

@@ -22,16 +22,22 @@ router.post('/',validateUser, async (req,res) => {
             return res.status(404).send('Email or password is incorrect !!')
         }
         const token = user.generateToken()
-        res.header('x-auth-token',token).json(token)
-
-        res.redirect('/')
-        
+        res.header('x-auth-token',token).redirect('/')
+       
 
     } catch (error) {
         res.send(404).send(error.message)
         console.log('Error ',error)
     }
 
+})
+
+// test route to see all of the users
+router.get('/', async (req,res) =>{
+
+    const result = await Users.find()
+
+    res.send(result)
 })
 
 module.exports = router

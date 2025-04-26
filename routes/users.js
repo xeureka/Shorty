@@ -32,9 +32,7 @@ router.post('/',validateUser,async (req,res) =>{
 
         const token = user.generateToken()
 
-        res.header('x-auth-token', token).json({name: user.name, email:user.email})
-
-        res.redirect('/')
+        res.header('x-auth-token', token).redirect('/')
         
     } catch (error) {
         res.status(401).send('Error Registering the user, ',error.message)
