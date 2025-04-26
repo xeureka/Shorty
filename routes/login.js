@@ -22,9 +22,9 @@ router.post('/',validateUser, async (req,res) => {
             return res.status(404).send('Email or password is incorrect !!')
         }
         const token = user.generateToken()
-        res.header('x-auth-token',token).send(token)
+        res.header('x-auth-token',token).json(token)
 
-        return res.send('/')
+        res.redirect('/')
         
 
     } catch (error) {
