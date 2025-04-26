@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Github } from "lucide-react";
+import axios from 'axios'
 
 export default function App() {
   const [longUrl, setLongUrl] = useState("");
@@ -14,23 +15,15 @@ export default function App() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ longUrl }),
-      });
+      const response = await axios.post("http://localhost:3000/", { longUrl });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setShortUrl(data.shortUrl);
+      if (response.status === 200) {
+        setShortUrl(response.data.shortUrl);
       } else {
-        setError(data || "Failed to generate short URL.");
+        setError(response.data || "Failed to generate short URL.");
       }
     } catch (err) {
-      setError("Server error");
+      setError(err.response?.data || "Server error");
     } finally {
       setLoading(false);
     }
