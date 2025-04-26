@@ -23,6 +23,8 @@ router.post('/',validateUser, async (req,res) => {
         }
         const token = user.generateToken()
         res.header('x-auth-token',token).send(token)
+
+        return res.send('/')
         
 
     } catch (error) {
@@ -33,7 +35,3 @@ router.post('/',validateUser, async (req,res) => {
 })
 
 module.exports = router
-
-// we need the email from the user
-// we verify the email
-// send the token t the user and rediret it the the url generator page
