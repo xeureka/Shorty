@@ -1,9 +1,9 @@
 
 const express = require('express')
 const router = express.Router()
-const Urls = require('../models/url')
+const Urls = require('../models/url.model')
 const generateRandomUrl = require('../utils/utils')
-
+const jwt = require('jsonwebtoken')
 
 router.post('/', async (req,res) =>{
 
@@ -12,12 +12,19 @@ router.post('/', async (req,res) =>{
 
     try {
 
+        const authToken = req.headers['x-auth-token']
+        const decoded = jwt.decode(authToken)
+
+
         let url = new Urls({
             longUrl,
-            shortCode
+            shortCode,
+            owner: decoded._id
         })
 
         await url.save()
+
+        res.send(url)
 
         res.json({shortUrl: `http://localhost:3000/${shortCode}`})
         
@@ -28,14 +35,16 @@ router.post('/', async (req,res) =>{
 
 // a route to see all the current history of the user
 
-router.get('/', async (req,res) => {
+router.get('/history', async (req,res) => {
 
     try {
+        const authToken = req.headers['x-auth-token']
+        const decoded = jwt.decode(authToken)
 
-        const allUsers = await Urls.find()
+        const History = await Urls.findOne({owner: decoded._id})
 
-        res.send(allUsers)
-        
+        res.send(History)
+  
     } catch (error) {
         res.status(404).send('Eror fetching data, ', error.message)
         console.log('Error, Fetching history, ',error)

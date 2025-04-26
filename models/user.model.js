@@ -19,7 +19,6 @@ userSchema.methods.generateToken = function(){
 }
 
 
-
 const Users = mongoose.model('User',userSchema)
 
 module.exports = Users;

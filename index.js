@@ -3,7 +3,7 @@ const express = require('express')
 const connectDB = require('./models/connection')
 const app = express()
 const cors = require('cors')
-const urlRoutes = require('./routes/urlRoutes')
+const urlRoutes = require('./routes/urls')
 const Register = require('./routes/users')
 const login = require('./routes/login')
 
