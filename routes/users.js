@@ -17,7 +17,6 @@ router.post('/',validateUser,async (req,res) =>{
 
 
         if (user.length > 0) return res.status(404).send('User Already Registered !!')
-
             
 
         const salt = await bcrypt.genSalt(10)
