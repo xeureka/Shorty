@@ -4,42 +4,30 @@ const router = express.Router()
 const Urls = require('../models/url.model')
 const generateRandomUrl = require('../utils/utils')
 
+
 router.post('/', async (req,res) =>{
 
     const {longUrl} = req.body;
     const shortCode = generateRandomUrl()
 
+
     try {
 
         let url = new Urls({
             longUrl,
-            shortCode,
+            shortCode
         })
 
         await url.save()
-
-        res.json({shortUrl: `http://localhost:3000/${shortCode}`})
+        
+                
+        res.send({shortUrl: `http://localhost:3000/${shortCode}`})
         
     } catch (error) {
         res.status(500).json('Server error')
     }
 })
 
-
-router.get('/', async (req,res) => {
-
-    try {
-
-        let result = await Urls.find()
-
-        res.send(result)
-        
-    } catch (error) {
-        console.log('Error Message ', error)
-    }
-
-
-})
 
 // router.get('/:shortCode', async (req,res) =>{
 
