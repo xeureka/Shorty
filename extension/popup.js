@@ -9,7 +9,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const url = tab.url;
 
     // Here you could send the URL to a shortener API. For now, fake it:
-    shortUrlInput.value = "https://short.url/" + btoa(url).slice(0, 6);
+    const req = new Request("http://localhost:3000", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:   JSON.stringify({longUrl: url}),
+    })
+
+    const resp = await fetch(req)
+    const data = await resp.json()
+
+    shortUrlInput.value = data.shortUrl
+
     resultDiv.classList.remove('hidden');
   });
 

@@ -4,22 +4,17 @@ const router = express.Router()
 const Urls = require('../models/url.model')
 const generateRandomUrl = require('../utils/utils')
 
-
-router.post('/', async (req,res) =>{
-
+router.post('/', async (req,res) =>{ 
     const {longUrl} = req.body;
     const shortCode = generateRandomUrl()
 
-
     try {
-
         let url = new Urls({
             longUrl,
             shortCode
         })
 
         await url.save()
-        
                 
         res.json({shortUrl: `http://localhost:3000/${shortCode}`})
         
