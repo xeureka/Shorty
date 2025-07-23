@@ -3,7 +3,6 @@ const express = require('express')
 const router = express.Router()
 const Urls = require('../models/url.model')
 const generateRandomUrl = require('../utils/utils')
-const checkExpiration = require('../utils/expiration')
 
 router.post('/', async (req,res) =>{ 
     const {longUrl} = req.body;
