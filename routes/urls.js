@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const Urls = require('../models/url.model')
 const generateRandomUrl = require('../utils/utils')
+const checkExpiration = require('../utils/expiration')
 
 router.post('/', async (req,res) =>{ 
     const {longUrl} = req.body;
@@ -30,11 +31,12 @@ router.get('/:shortCode', async (req,res) =>{
 
         const url = await Urls.findOne({shortCode: req.params.shortCode})
 
-        if (url){
-            return res.redirect(url.longUrl)
-        } else{
-            return res.status(404).json('No URL found !!')
+       
+        if (!url){
+            return res.status(403).jsno('No URL found !')
         }
+
+        return res.json(url)
         
     } catch (error) { 
         res.status(500).json('Server error')
