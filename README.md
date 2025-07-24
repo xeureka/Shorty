@@ -1,6 +1,1 @@
-
-# URL Shortner
-
-
-- Frontend = react + Tailwind
-- Backend = Express + mongodb
+Browser Extension to shorten, copy and share long links.
